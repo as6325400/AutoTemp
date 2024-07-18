@@ -19,10 +19,14 @@ jobs:
       - name: Get Ubuntu fonts
         run: |
           wget https://assets.ubuntu.com/v1/0cef8205-ubuntu-font-family-0.83.zip -O ubuntu-font.zip
-          unzip ubuntu-font.zip
+          unzip ubuntu-font.zip -d ubuntu-fonts
+          sudo mv ubuntu-fonts /usr/share/fonts/truetype/ubuntu-fonts
+          sudo fc-cache -fv
       - name: Install Chinese Fonts
         run: |
-          wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf
+          wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf -O NotoSansMonoCJKtc-VF.ttf
+          sudo mv NotoSansMonoCJKtc-VF.ttf /usr/share/fonts/truetype/
+          sudo fc-cache -fv
       - name: Build
         uses: xu-cheng/latex-action@v3
         with:
@@ -30,8 +34,8 @@ jobs:
           latexmk_use_xelatex: true
           work_in_root_file_dir: true
           extra_fonts: |
-            ./ubuntu-font-family-0.83/*.ttf
-            ./*.ttf
+            /usr/share/fonts/truetype/ubuntu-fonts/*.ttf
+            /usr/share/fonts/truetype/NotoSansMonoCJKtc-VF.ttf
       - name: Push codebook.pdf
         run: |
           cp source/codebook/codebook.pdf pdf/codebook.pdf
