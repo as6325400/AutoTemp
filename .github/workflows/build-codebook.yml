@@ -25,6 +25,7 @@ jobs:
       - name: Install Chinese Fonts
         run: |
           wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf
+          ls ./*.ttf
       - name: List Files Before Build
         run: ls ./**/*.ttf
       - name: Build
