@@ -24,7 +24,7 @@ jobs:
           ls ./ubuntu-font-family-0.83
       - name: Install Chinese Fonts
         run: |
-          wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf
+          wget -O source/codebook/fonts/NotoSansMonoCJKtc-VF.ttf https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf
           ls 
       - name: List Files Before Build
         run: ls ./**/*.ttf
