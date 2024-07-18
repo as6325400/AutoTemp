@@ -19,8 +19,9 @@ jobs:
       - name: Get Ubuntu fonts
         run: |
           wget https://assets.ubuntu.com/v1/0cef8205-ubuntu-font-family-0.83.zip
+          mv 0cef8205-ubuntu-font-family-0.83.zip ubuntu-font.zip
           unzip ubuntu-font.zip
-          ls ./ubuntu-font-family-0.83/
+          ls ./ubuntu-font-family-0.83
       - name: Install Chinese Fonts
         run: |
           wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKtc-VF.ttf
