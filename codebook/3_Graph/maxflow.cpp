@@ -1,6 +1,6 @@
 #define int long long
 
-// Edmonds-Karp Algorithm
+// Edmonds-Karp Algorithm Time: O(VE^2) 實際上會快一點
 
 class edge{
   public:
