@@ -1,10 +1,11 @@
 class tarjan{
+    //  1-base
     int time = 1;
+    int id = 1;
     stack<int> s;
-    vector<int> dfn;
     vector<int> low;
+    vector<int> dfn;
     vector<bool> in_stack;
-    vector<vector<int>> ans;
     void dfs(int node, vector<vector<int>> &graph){
       in_stack[node] = true;
       s.push(node);
@@ -24,17 +25,23 @@ class tarjan{
         while(s.top() != node){
           t.push_back(s.top());
           in_stack[s.top()] = false;
+          scc_id[s.top()] = id;
           s.pop();
         }
         t.push_back(s.top());
+        scc_id[s.top()] = id;
         in_stack[s.top()] = false;
         s.pop();
+        id++;
       }
       if(!t.empty()) ans.push_back(t);
     }
   public:
+    vector<int> scc_id;
+    vector<vector<int>> ans;
     vector<vector<int>> scc(vector<vector<int>> &graph){
       int num = graph.size();
+      scc_id.resize(num, -1);
       dfn.resize(num, 0);
       low.resize(num, 0);
       in_stack.resize(num, false);
