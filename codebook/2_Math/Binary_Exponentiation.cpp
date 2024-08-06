@@ -1,14 +1,13 @@
-//x^y % p
-int func(int x,int y,int p){
-	int res = 1;
-	while(y != 0){
-		if(y%2==1){
-			res *= x;
-			res %=p;
-		}
-		x *= x;
-		y /= 2;// 5^8 => (5^2)^4
-		x %= p;//((5^2) % 7)^4
-	}
-	return res;
+// 根據費馬小定理，若 a p 互質，a^(p-2) 為 a 在 mod p 時的乘法逆元
+int fast_pow(int a, int b, int mod)
+{	
+	// a^b % mod 
+  int res = 1;
+  while(b)
+  {
+    if(b & 1) res = (res * a) % mod;
+    a = (a * a) % mod;
+    b >>= 1;
+  }
+  return res;
 }
