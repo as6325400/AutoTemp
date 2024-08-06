@@ -39,6 +39,8 @@ class tarjan{
   public:
     vector<int> scc_id;
     vector<vector<int>> ans;
+    // ans ans[i] 代表第 i 個強連通分量裡面包涵的點
+    // scc_id[i] 代表第 i 個點屬於第幾個強連通分量
     vector<vector<int>> scc(vector<vector<int>> &graph){
       int num = graph.size();
       scc_id.resize(num, -1);
