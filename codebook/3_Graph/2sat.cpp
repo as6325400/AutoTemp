@@ -13,7 +13,7 @@
 
 // 以這些條件建立有像圖，並且找尋 scc ，若 i 以及 i + m 在同一個 scc 中代表無解
 // 若要求解，則若 i 的 scc_id 小於 i + m 的 scc_id 則 i 為 true ，反之為 false
-// tarjan 在下面
+// tarjan 的模板在上面
 cin >> n >> m;
  
 vector<vector<int>> graph(m * 2 + 1);
