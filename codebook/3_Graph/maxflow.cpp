@@ -1,20 +1,22 @@
 #define int long long
 
 // Edmonds-Karp Algorithm Time: O(VE^2) 實際上會快一點
+// 記得在 main 裡面 resize graph
 
 class edge{
   public:
     int next;
     int capicity;
     int rev;
-    edge(int _n, int _c, int _r) : next(_n), capicity(_c), rev(_r){};
+    bool is_rev;
+    edge(int _n, int _c, int _r, int _ir) : next(_n), capicity(_c), rev(_r), is_rev(_ir){};
 };
 
 vector<vector<edge>> graph;
 
 void add_edge(int a, int b, int capacity){
-  graph[a].push_back(edge(b, capacity, graph[b].size()));
-  graph[b].push_back(edge(a, 0, graph[a].size() - 1));
+  graph[a].push_back(edge(b, capacity, graph[b].size(), false));
+  graph[b].push_back(edge(a, 0, graph[a].size() - 1, true));
 }
 
 int dfs(int now, int end, int flow, vector<pair<int, int>> &path, int idx){
