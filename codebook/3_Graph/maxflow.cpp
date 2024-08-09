@@ -2,6 +2,8 @@
 
 // Edmonds-Karp Algorithm Time: O(VE^2) 實際上會快一點
 // 記得在 main 裡面 resize graph
+// 最小割，找到最少條的邊切除，使得從 src 到 end 的 maxflow 為 0
+// 枚舉所有邊 i -> j ， src 可以到達 i 但無法到達 j ，那這條邊為最小割裡的邊之一
 
 class edge{
   public:
