@@ -86,7 +86,7 @@ signed main()
   vector<int> save(n + 1, 0);
   for(int i = 1; i <= n; i++){
     cin >> save[i];
-  }
+  } 
   segment_tree<int> s;
   // init [1, n]
   s.root = s.build(save, 1, n);
