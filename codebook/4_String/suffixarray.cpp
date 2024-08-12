@@ -1,10 +1,12 @@
 struct SuffixArray {
 	int n; string s;
 	vector<int> sa, rk, lc;
+  // 想法 : 排序過了，因此前綴長得像的會距離很近在差不多位置
 	// n: 字串長度
 	// sa: 後綴數組，sa[i] 表示第 i 小的後綴的起始位置
 	// rk: 排名數組，rk[i] 表示從位置 i 開始的後綴的排名
 	// lc: LCP 數組，lc[i] 表示 sa[i] 和 sa[i + 1] 的最長公共前綴長度
+  // 求 sa[i] 跟 sa[j] 的 LCP 長度 當 i < j : min(lc[i] ...... lc[j - 1])
 	SuffixArray(const string &s_) {
 		s = s_; n = s.length();
 		sa.resize(n);
