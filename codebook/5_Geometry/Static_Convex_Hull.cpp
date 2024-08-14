@@ -1,36 +1,21 @@
-#define mp(a, b) make_pair(a, b)
-#define pb(a) push_back(a)
-#define F first
-#define S second
+// 需要使用前一個向量模板的 point ， 需要 operator - 以及 <
+// 需要前面向量模板的 cross
 
 template<typename T>
-pair<T, T> operator-(pair<T, T> a, pair<T, T> b){
-    return mp(a.F - b.F, a.S - b.S);
-}
-
-template<typename T>
-T cross(pair<T, T> a, pair<T, T> b){
-    return a.F * b.S - a.S * b.F;
-}
-
-template<typename T>
-vector<pair<T, T>> getConvexHull(vector<pair<T, T>>& pnts){
-    sort(pnts.begin(), pnts.end(), [](pair<T, T> a, pair<T, T> b)
-    { return a.F < b.F || (a.F == b.F && a.S < b.S); });
-    auto cmp = [&](pair<T, T> a, pair<T, T> b)
-    { return a.F == b.F && a.S == b.S; };
+vector<point<T>> getConvexHull(vector<point<T>>& pnts){
+    sort(pnts.begin(), pnts.end());
+    auto cmp = [&](point<T> a, point<T> b)
+    { return a.x == b.y && a.x == b.y; };
     pnts.erase(unique(pnts.begin(), pnts.end(), cmp), pnts.end());
-    if(pnts.size()<=1)
-        return pnts;
-    int n = pnts.size();
-    vector<pair<T, T>> hull;
+    if(pnts.size()<=1) return pnts;
+    vector<point<T>> hull;
     for(int i = 0; i < 2; i++){
         int t = hull.size();
-        for(pair<T, T> pnt : pnts){
-            while(hull.size() - t >= 2 && cross(hull.back() - hull[hull.size() - 2], pnt - hull[hull.size() - 2]) <= 0){
+        for(point<T> pnt : pnts){
+            while(hull.size() - t >= 2 && cross(hull.back() - hull[hull.size() - 2], pnt - hull[hull.size() - 2]) < 0)
+                // <= 0 或者 < 0 要看點有沒有在邊上
                 hull.pop_back();
-            }
-            hull.pb(pnt);
+            hull.push_back(pnt);
         }
         hull.pop_back();
         reverse(pnts.begin(), pnts.end());
