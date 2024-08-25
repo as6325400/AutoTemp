@@ -64,10 +64,10 @@ vector<pair<int, int>> search_path(int start, int end){
   return ans;
 }
 
-int maxflow(int start, int end, int node_num){
+int maxflow(int start, int end){
   int ans = 0;
   while(1){
-    vector<bool> visited(node_num + 1, false);
+    vector<bool> visited(graph.size() + 1, false);
     auto tmp = search_path(start, end);
     if(tmp.size() == 0) break;
     auto flow = dfs(start, end, 1e9, tmp, 0);
