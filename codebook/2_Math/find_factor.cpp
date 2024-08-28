@@ -33,6 +33,7 @@ int prho(int p){
 }
 
 // 回傳將 n 質因數分解的結果，由小到大排序
+// ex: input: 48, output: 2 2 2 2 3
 vector<int> prime_factorization(int n){
   vector<int> ans;
   while(n != 1){
