@@ -1,6 +1,7 @@
 // fast_pow 去前面抄，需要處裡防暴乘法 
 // 記得 #define int long long 也要放
 // long long 範圍內測試過答案正確
+// time: O(logn)
 
 inline bool mr(int x, int p) {
   if (fast_pow(x, p - 1, p) != 1) return 0; 
