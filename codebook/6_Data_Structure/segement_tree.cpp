@@ -1,11 +1,11 @@
 // #define int long long
 
-// 要改最大或者最小值線段樹需改 build 跟 queryRange
+// 要改最大或者最小值線段樹需改 build 跟 queryRange, updateRange
 // 0-base 注意
 template<typename T>
 class segment_tree {
 private:
-  vector<T> tree, lazy;
+  vector<T> tree, lazy, arr;
   int size;
   void build(vector<T> &save, int node, int start, int end) {
     if (start == end) tree[node] = save[start];
@@ -74,6 +74,7 @@ public:
     int n = size = save.size();
     tree.resize(4 * n);
     lazy.resize(4 * n);
+    arr = save;
     build(save, 1, l, r);
   }
   void modify_scope(int l, int r, T delta) {
