@@ -273,3 +273,6 @@ TSWLatexianTemp*
 
 # macos
 *.DS_Store
+
+# vscode file
+.vscode/
