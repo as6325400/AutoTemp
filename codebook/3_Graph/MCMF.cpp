@@ -10,11 +10,11 @@
 class edge{
   public:
     int next;
-    int capicity;
+    int capacity;
     int rev;
     int cost;
     bool is_rev;
-    edge(int _n, int _c, int _r, int _co, int _ir) : next(_n), capicity(_c), rev(_r), cost(_co), is_rev(_ir){};
+    edge(int _n, int _c, int _r, int _co, int _ir) : next(_n), capacity(_c), rev(_r), cost(_co), is_rev(_ir){};
 };
 
 vector<vector<edge>> graph;
@@ -28,11 +28,11 @@ pii dfs(int now, int end, pii data, vector<pii> &path, int idx){
   auto [flow, cost] = data;
   if(now == end) return {flow, 0};
   auto &e = graph[now][path[idx + 1].second];
-  if(e.capicity > 0){
-    auto [ret, nc] = dfs(e.next, end, {min(flow, e.capicity), cost + e.cost}, path, idx + 1);
+  if(e.capacity > 0){
+    auto [ret, nc] = dfs(e.next, end, {min(flow, e.capacity), cost + e.cost}, path, idx + 1);
     if(ret > 0){
-      e.capicity -= ret;
-      graph[e.next][e.rev].capicity += ret;
+      e.capacity -= ret;
+      graph[e.next][e.rev].capacity += ret;
       return {ret, nc + ret * e.cost};
     }
   }
@@ -51,7 +51,7 @@ vector<pii> search_path(int start, int end){
     auto node = q.front(); vis[node] = false; q.pop();
     for(int i = 0; i < graph[node].size(); i++){
       auto &e = graph[node][i];
-      if(e.capicity > 0 and e.cost + dis[node] < dis[e.next]){
+      if(e.capacity > 0 and e.cost + dis[node] < dis[e.next]){
         dis[e.next] = e.cost + dis[node];
         parent[e.next] = {node, i};
         if(!vis[e.next]){
