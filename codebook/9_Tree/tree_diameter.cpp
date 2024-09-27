@@ -1,14 +1,19 @@
-int dis[200005];
-int c;
+int d1[200005], d2[200005], ans;
 
 void dfs(int now, int fa, vector<vector<int>> &graph){
   for(auto i: graph[now]){
     if(i != fa){
-      dis[i] = dis[now] + 1;
-      if(dis[i] > dis[c]) c = i;
       dfs(i, now, graph);
+      if(d1[i] + 1 > d1[now]){
+        d2[now] = d1[now];
+        d1[now] = d1[i] + 1;
+      }
+      else if(d1[i] + 1 > d2[now]){
+        d2[now] = d1[i] + 1;
+      }
     }
   }
+  ans = max(ans, d1[now] + d2[now]);
 }
 
 signed main()
@@ -23,7 +28,5 @@ signed main()
     graph[b].push_back(a);
   }
   dfs(1, 0, graph);
-  dis[c] = 0;
-  dfs(c, 0, graph);
-  cout << dis[c];
+  cout << ans << '\n';
 }
