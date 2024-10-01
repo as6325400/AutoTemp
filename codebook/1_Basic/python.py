@@ -9,8 +9,13 @@ arr = list(map(float, s.split()))
 # 分數用法 Fraction(被除數, 除數)
 from fractions import Fraction
 
+frac = Fraction(3, 4)
+numerator = frac.numerator # 取出分子
+denominator = frac.denominator # 取出分母
+
 arr = [Fraction(0), Fraction(1, 6), Fraction(1, 2), Fraction(5, 12), Fraction(0), Fraction(-1, 12), Fraction(0)]
 
+# 可以直接做乘除
 def fx(x):
     x = Fraction(x)
     ans = Fraction(0)
