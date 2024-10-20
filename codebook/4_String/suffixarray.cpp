@@ -7,6 +7,7 @@ struct SuffixArray {
 	// rk: 排名數組，rk[i] 表示從位置 i 開始的後綴的排名
 	// lc: LCP 數組，lc[i] 表示 sa[i] 和 sa[i + 1] 的最長公共前綴長度
   // 求 sa[i] 跟 sa[j] 的 LCP 長度 當 i < j : min(lc[i] ...... lc[j - 1])
+	// 求 longest common substring : A + "#" + B 建立 SA，找到 sa 相鄰但不同組中 lc 最大的
 	SuffixArray(const string &s_) {
 		s = s_; n = s.length();
 		sa.resize(n);
