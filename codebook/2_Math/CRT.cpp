@@ -1,31 +1,21 @@
-int exgcd(int a, int b, int &x, int &y) {
-  if (!b) {
-    x = 1, y = 0;
-    return a;
+// vec[i] = {m_i, x_i}，求最小非負 x 使得 x ≡ x_i (mod m_i) 對所有 i 同時成立；無解回 -1
+// 注意 overflow
+int CRT(vector<pair<int, int>> &v)
+{
+  int m = v[0].first, x = (v[0].second % m + m) % m;
+  for (int i = 1; i < (int)v.size(); ++i)
+  {
+    int mi = v[i].first, xi = (v[i].second % mi + mi) % mi;
+    int g = gcd(m, mi), d = xi - x;
+    if (d % g) return -1;
+    int m1 = m / g, m2 = mi / g;
+    auto ab = ext_gcd((int)m1, (int)m2);
+    int inv = ((int)ab.first % m2 + m2) % m2;
+    int k = ((d / g) % m2 + m2) % m2;
+    k = (k * inv) % m2;
+    x = (x + m * k) % (m * m2);
+    m *= m2;
+    x = (x + m) % m;
   }
-  int g = exgcd(b, a % b, y, x);
-  y -= a / b * x;
-  return g;
-}
-
-int inv(int x, int m) {
-  int a, b;
-  exgcd(x, m, a, b);
-  a %= m;
-  if (a < 0) a += m;
-  return a;
-}
-
-// 求解 x = r1 % m1 = r2 % m2 = r3 % m3...
-// a[i] = {{remain, mod}, ...}
-// notice: 如出現極限測資(1e18)，需開__int128
-int CRT(vector<pair<int, int>> &a) {
-  int s = 1, ret = 0;
-  for (auto &[r, m] : a) s *= m;
-  for (auto &[r, m] : a) {
-    int t = s / m;
-    ret += r * t % s * inv(t, m) % s;
-    if (ret >= s) ret -= s;
-  }
-  return ret;
+  return x;
 }
