@@ -16,5 +16,5 @@ pair<int, int> ext_gcd(int a, int b) //擴展歐幾里德 ax+by = gcd(a,b)
 		return {0, 1};
 	int x, y;
 	tie(x, y) = ext_gcd(b % a, a);
-	return make_pair(y - b * x / a, x);
+	return make_pair(y - (b / a) * x, x);
 }
