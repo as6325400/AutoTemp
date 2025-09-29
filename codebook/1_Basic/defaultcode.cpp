@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n' // 如果是互動題要把這個註解掉
+#define de(x) cout << #x << '=' << x << ", "
+#define dd cout << '\n';
 // #pragma GCC target("popcnt")
 // #pragma GCC optimize("O3")
 using namespace std;
