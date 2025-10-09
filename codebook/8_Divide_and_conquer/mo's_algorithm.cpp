@@ -14,7 +14,8 @@ k = sqrt(n);
 for(int i = 0; i < q; i++){
   int l, r;
   cin >> l >> r;
-  queries[i] = {l / k, r, l, i}; // 先對 l 的塊，再對 r 排序
+  queries[i] = {l / k, r, l, i};
+  // 先對 l 的塊，再對 r 排序
 }
 
 sort(queries.begin(), queries.end());
