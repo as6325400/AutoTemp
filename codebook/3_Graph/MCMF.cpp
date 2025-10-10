@@ -6,6 +6,7 @@
 // 把原本的 BFS 換成 SPFA 而已
 // 記得在 main 裡面 resize graph
 // MCMF 回傳 {flow, cost}
+// 無向圖：add_edge(u,v,C,W), add_edge(v,u,C,W);
 
 class edge{
   public:
