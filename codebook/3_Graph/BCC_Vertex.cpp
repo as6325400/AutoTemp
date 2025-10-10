@@ -1,10 +1,12 @@
-// [USAGE] BCC bcc_solver(n); bcc_solver.add_edge(u, v); bcc_solver.solve();
-// bcc_solver.is_ap[i]; bcc_solver.bcc[j]; bcc_solver.nbcc;
-// i 是否為割點; 第 j 個點雙連通分量中包含的所有頂點; 點雙連通分量數量
+// [USAGE] BCC bcc(n); bcc.add_edge(u, v); bcc.solve();
+// bcc.is_ap[i]; // i 是否為割點
+// bcc.bcc[j]; // 第 j 個點雙連通分量中包含的所有頂點
+// bcc.nbcc; // 點雙連通分量數量
 
-// [USAGE] bcc_solver.block_cut_tree();
-// bcc_solver.nG[i]; bcc_solver.bln[i]; bcc_solver.cir[j];
-// 新圖頂點 i 的所有鄰居; 原圖中的 i 在新圖上的編號(i可以是割點); 新圖上的頂點 j 是否為割點
+// [USAGE] bcc.block_cut_tree();
+// bcc.nG[i]; // 新圖頂點 i 的所有鄰居
+// bcc.bln[i]; // 原圖中的 i 在新圖上的編號(i可以是割點)
+// bcc.cir[j]; // 新圖上的頂點 j 是否為割點
 struct BCC { // 0-base
   int n, dft, nbcc;
   vector<int> low, dfn, bln, stk, is_ap, cir;
