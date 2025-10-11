@@ -1,4 +1,10 @@
+// 從 top 的深度較低的那個節點開始跳
+// 跳到同一條鏈上 (top 相同)
+// 一邊跳一邊更新線段樹
+// in 是 dfn
+
 struct HLD {
+    // 0-base
     int n, cur;
     vector<int> siz, top, dep, parent, in, out, seq;
     vector<vector<int>> adj;
@@ -79,3 +85,59 @@ struct HLD {
         return lca(rt, a) ^ lca(a, b) ^ lca(b, rt);
     }
 };
+
+// example 找兩個子節點間的 max 以及改值
+
+signed main() {
+  int n, q;
+  cin >> n >> q;
+
+  vector<int> tp(n);
+  for (int i = 0; i < n; i++) cin >> tp[i];
+
+  HLD t(n);
+  for (int i = 0; i < n - 1; i++) {
+    int u, v;
+    cin >> u >> v;
+    --u; --v;
+    t.addEdge(u, v);
+  }
+
+  t.work(0); // 以 0 (節點1) 為根
+
+  // 將點值依照 dfn 映射到線段樹底層
+  for (int i = 0; i < n; i++) {
+    a[t.in[i]] = tp[i];
+  }
+  build(1, 0, n - 1); // 根 id = 1
+
+  auto path_max = [&](int u, int v) {
+    int res = LLONG_MIN;
+    // 往上跳鏈 邊跳邊維護答案
+    while (t.top[u] != t.top[v]) {
+      if (t.dep[t.top[u]] < t.dep[t.top[v]]) swap(u, v);
+      res = max(res, query(1, 0, n - 1, t.in[t.top[u]], t.in[u]));
+      u = t.parent[t.top[u]];
+    }
+    int l = t.in[u], r = t.in[v];
+    if (l > r) swap(l, r);
+    res = max(res, query(1, 0, n - 1, l, r));
+    return res;
+  };
+
+  while (q--) {
+    int mode;
+    cin >> mode;
+    if (mode == 1) {
+      int s, x;
+      cin >> s >> x;
+      --s;
+      modify(1, 0, n - 1, t.in[s], x);
+    } else if (mode == 2) {
+      int a, b;
+      cin >> a >> b;
+      --a; --b;
+      cout << path_max(a, b) << '\n';
+    }
+  }
+}
