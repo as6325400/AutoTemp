@@ -2,32 +2,30 @@
   \setlength{\tabcolsep}{1pt}
   \setlength{\columnsep}{0pt}
 
-  \noindent
+  % 整數分割數 p(n)
+  \noindent\textbf{整數分割數 $p(n)$：}把 $n$ 分成正整數和的不同方式數量。
   \begin{tabular}{@{}c|*{20}{c@{\ }}@{}}
     $n$    & 2 & 3 & 4 & 5 & 6  & 7  & 8  & 9  & 20  & 30   & 40  & 50  & 100 \\
     \hline
     $p(n)$ & 2 & 3 & 5 & 7 & 11 & 15 & 22 & 30 & 627 & 5604 & 4e4 & 2e5 & 2e8 \\
   \end{tabular}
 
-  \noindent
+  \vspace{0.4em}
+
+  % 最大因數數量函數 d(i)
+  \noindent\textbf{最大因數數量 $\max_{i\le n} d(i)$：}小於等於 $n$ 的整數中，因數最多者的因數個數。
   \begin{tabular}{@{}c|*{20}{c@{\ }}@{}}
     $n$
     & 100 & 1e3 & 1e6 & 1e9  & 1e12 & 1e15  & 1e18 \\
     \hline
-    $d(i)$ % max _ { i <= n } d(i)
+    $d(i)$
     & 12  & 32  & 240 & 1344 & 6720 & 26880 & 103680 \\
   \end{tabular}
 
-  % \vspace{-2.0em}
-  % \begin{center}
-  %   \begin{tabular}{c|*{20}c}
-  %     $n$  & 1 & 2 & 3 & 4  & 5   & 6   & 7    & 8     & 9     & 10    & 11 \\
-  %     \hline
-  %     $n!$ & 1 & 2 & 6 & 24 & 120 & 720 & 5040 & 40320 & 3.6e5 & 3.6e6 & 4e7 \\
-  %   \end{tabular}
-  % \end{center}
+  \vspace{0.4em}
 
-  \noindent
+  % 中央二項係數
+  \noindent\textbf{中央二項式 $\binom{2n}{n}$：}常用於卡塔蘭數與組合計數。
   \begin{tabular}{c|*{20}c}
     $n$             & 1 & 2 & 3  & 4  & 5   & 6   & 7    & 8     & 9
                     & 10     & 11  & 12  & 13  & 14  & 15 \\
@@ -36,7 +34,10 @@
                     & 184756 & 7e5 & 2e6 & 1e7 & 4e7 & 1.5e8 \\
   \end{tabular}
 
-  \noindent
+  \vspace{0.4em}
+
+  % 貝爾數
+  \noindent\textbf{貝爾數 $B_n$：}將 $n$ 個元素分成任意多個非空集合的劃分數。
   \begin{tabular}{c|*{20}c}
     $n$             & 2 & 3  & 4  & 5   & 6   & 7    & 8     & 9 & 10     & 11  & 12  & 13  \\
                     \hline
