@@ -1,39 +1,63 @@
 \begin{itemize}
-\item Bernoulli numbers
+\item 白努力數（Bernoulli numbers）
 
-$B_0-1,B_1^{\pm}=\pm\frac{1}{2},B_2=\frac{1}{6},B_3=0$
+$B_0=1,\ B_1^{\pm}=\pm\frac{1}{2},\ B_2=\frac{1}{6},\ B_3=0$
 
-$\displaystyle\sum_{j=0}^m\binom{m+1}{j}B_j=0$, EGF is $B(x) = \frac{x}{e^x - 1}=\displaystyle\sum_{n=0}^\infty B_n\frac{x^n}{n!}$.
+滿足關係式 $\displaystyle\sum_{j=0}^m\binom{m+1}{j}B_j=0$。  
+其指數生成函數（EGF）為
+\[
+B(x)=\frac{x}{e^x-1}=\sum_{n=0}^{\infty}B_n\frac{x^n}{n!}.
+\]
+且
+\[
+S_m(n)=\sum_{k=1}^{n}k^m=\frac{1}{m+1}\sum_{k=0}^{m}\binom{m+1}{k}B_k^{+}\,n^{m+1-k}.
+\]
 
-$S_m(n)=\displaystyle\sum_{k=1}^nk^m=\frac{1}{m+1}\sum_{k=0}^m\binom{m+1}{k}B^{+}_kn^{m+1-k}$
+\item 第二類史特林數（Stirling numbers of the second kind）
 
-\item Stirling numbers of the second kind
-Partitions of $n$ distinct elements into exactly $k$ groups. 
+表示將 $n$ 個不同元素分成恰好 $k$ 個非空集合的劃分數。  
+遞迴式：
+\[
+S(n,k)=S(n-1,k-1)+k\,S(n-1,k), \quad S(n,1)=S(n,n)=1.
+\]
+顯式公式：
+\[
+S(n,k)=\frac{1}{k!}\sum_{i=0}^{k}(-1)^{k-i}\binom{k}{i}i^n.
+\]
+轉換關係：
+\[
+x^n=\sum_{i=0}^{n}S(n,i)\,(x)_i.
+\]
 
-$S(n, k) = S(n - 1, k - 1) + kS(n - 1, k), S(n, 1) = S(n, n) = 1$
+\item 五角數定理（Pentagonal number theorem）
 
-$S(n, k) = \frac{1}{k!}\sum_{i=0}^{k}(-1)^{k-i}{k \choose i}i^n$
+\[
+\prod_{n=1}^{\infty}(1-x^n)
+=1+\sum_{k=1}^{\infty}(-1)^k\!\left(x^{k(3k+1)/2}+x^{k(3k-1)/2}\right).
+\]
+此恆等式由歐拉提出，與分割函數的生成函數密切相關。
 
-$x^n     = \sum_{i=0}^{n} S(n, i) (x)_i$
+\item 卡塔蘭數（Catalan numbers）
 
-\item Pentagonal number theorem
+\[
+C^{(k)}_n=\frac{1}{(k-1)n+1}\binom{kn}{n},
+\qquad
+C^{(k)}(x)=1+x\,[C^{(k)}(x)]^k.
+\]
+其中 $C^{(2)}_n$ 為經典卡塔蘭數，常出現在二元樹、括號配對、Dyck path 等組合結構中。
 
-$\displaystyle\prod_{n=1}^{\infty}(1-x^n)=1+\sum_{k=1}^{\infty}(-1)^k\left(x^{k(3k+1)/2} + x^{k(3k-1)/2}\right)$
+\item 歐拉數（Eulerian numbers）
 
-\item Catalan numbers
-
-$C^{(k)}_n = \displaystyle \frac{1}{(k - 1)n + 1}\binom{kn}{n}$
-
-$C^{(k)}(x) = 1 + x [C^{(k)}(x)]^k$
-
-\item Eulerian numbers
-
-Number of permutations $\pi \in S_n$ in which exactly $k$ elements are greater than the previous element. $k$ $j$:s s.t. $\pi(j)>\pi(j+1)$, $k+1$ $j$:s s.t. $\pi(j)\geq j$, $k$ $j$:s s.t. $\pi(j)>j$.
-
-$E(n,k) = (n-k)E(n-1,k-1) + (k+1)E(n-1,k)$
-
-$E(n,0) = E(n,n-1) = 1$
-
-$E(n,k) = \sum_{j=0}^k(-1)^j\binom{n+1}{j}(k+1-j)^n$
+表示排列 $\pi\in S_n$ 中，恰有 $k$ 個元素比前一個元素大的排列數。  
+滿足遞迴式：
+\[
+E(n,k)=(n-k)E(n-1,k-1)+(k+1)E(n-1,k),
+\quad
+E(n,0)=E(n,n-1)=1.
+\]
+顯式公式：
+\[
+E(n,k)=\sum_{j=0}^{k}(-1)^j\binom{n+1}{j}(k+1-j)^n.
+\]
 
 \end{itemize}
