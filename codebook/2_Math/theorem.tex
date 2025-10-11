@@ -1,96 +1,108 @@
 \begin{itemize}
-\item Cramer's rule
+\item Cramer 法則
 $$
 \begin{aligned}ax+by=e\\cx+dy=f\end{aligned}
 \Rightarrow
 \begin{aligned}x=\dfrac{ed-bf}{ad-bc}\\y=\dfrac{af-ec}{ad-bc}\end{aligned}
 $$
 
-\item Vandermonde's Identity
+\item Vandermonde 恆等式
 $$
-C(n + m, k) = \sum_{i=0}^k C(n, i)C(m, k - i)
+C(n+m,k)=\sum_{i=0}^{k} C(n,i)\,C(m,k-i)
 $$
 
-\item Kirchhoff's Theorem
+\item Kirchhoff 定理
 
-Denote $L$ be a $n \times n$ matrix as the Laplacian matrix of graph $G$, where $L_{ii} = d(i)$, $L_{ij} = -c$ where $c$ is the number of edge $(i, j)$ in $G$.
+設 $L$ 為圖 $G$ 的 $n\times n$ Laplacian 矩陣，其中 $L_{ii}=d(i)$，$L_{ij}=-c$，$c$ 為邊 $(i,j)$ 的條數。
 \begin{itemize}
-    %\itemsep-0.5em
-    \item The number of undirected spanning in $G$ is $\lvert \det(\tilde{L}_{11}) \rvert$.
-    \item The number of directed spanning tree rooted at $r$ in $G$ is $\lvert \det(\tilde{L}_{rr}) \rvert$.
+    \item 無向圖的生成樹數為 $\lvert \det(\tilde{L}_{11}) \rvert$。
+    \item 以 $r$ 為根的有向生成樹數為 $\lvert \det(\tilde{L}_{rr}) \rvert$。
 \end{itemize}
 
-\item Tutte's Matrix
+\item Tutte 矩陣
 
-Let $D$ be a $n \times n$ matrix, where $d_{ij} = x_{ij}$ ($x_{ij}$ is chosen uniformly at random) if $i < j$ and $(i, j) \in E$, otherwise $d_{ij} = -d_{ji}$. $\frac{rank(D)}{2}$ is the maximum matching on $G$.
+令 $D$ 為 $n\times n$ 矩陣，當 $i<j$ 且 $(i,j)\in E$ 時令 $d_{ij}=x_{ij}$（$x_{ij}$ 由均勻隨機選取），否則令 $d_{ij}=-d_{ji}$。則 $\dfrac{\mathrm{rank}(D)}{2}$ 為圖 $G$ 的最大匹配數。
 
-\item Cayley's Formula
-
-\begin{itemize}
-    %\itemsep-0.5em
-  \item Given a degree sequence $d_1, d_2, \ldots, d_n$ for each \textit{labeled} vertices, there are $\frac{(n - 2)!}{(d_1 - 1)!(d_2 - 1)!\cdots(d_n - 1)!}$ spanning trees.
-  \item Let $T_{n, k}$ be the number of \textit{labeled} forests on $n$ vertices with $k$ components, such that vertex $1, 2, \ldots, k$ belong to different components. Then $T_{n, k} = kn^{n - k - 1}$.
-\end{itemize}
-
-\item Erdős–Gallai theorem 
-
-A sequence of nonnegative integers $d_1\ge\cdots\ge d_n$ can be represented as the degree sequence of a finite simple graph on $n$ vertices if and only if $d_1+\cdots+d_n$ is even and $\displaystyle\sum_{i-1}^kd_i\le k(k-1)+\displaystyle\sum_{i=k+1}^n\min(d_i,k)$ holds for every $1\le k\le n$.
-
-\item Gale–Ryser theorem
-
-A pair of sequences of nonnegative integers $a_1\ge\cdots\ge a_n$ and $b_1,\ldots,b_n$ is bigraphic if and only if $\displaystyle\sum_{i=1}^n a_i=\displaystyle\sum_{i=1}^n b_i$ and $\displaystyle\sum_{i=1}^k a_i\le \displaystyle\sum_{i=1}^n\min(b_i,k)$ holds for every $1\le k\le n$.
-
-\item Fulkerson–Chen–Anstee theorem
-
-A sequence $(a_1,b_1),\ldots,(a_n,b_n)$ of nonnegative integer pairs with $a_1\ge\cdots\ge a_n$ is digraphic if and only if $\displaystyle\sum_{i=1}^n a_i=\displaystyle\sum_{i=1}^n b_i$ and $\displaystyle\sum_{i=1}^k a_i\le \displaystyle\sum_{i=1}^k\min(b_i,k-1)+\displaystyle\sum_{i=k+1}^n\min(b_i,k)$ holds for every $1\le k\le n$.
-
-\item Pick's theorem
-
-For simple polygon, when points are all integer, we have $A=\text{\#\{lattice points in the interior\}} + \frac{\text{\#\{lattice points on the boundary\}}}{2} - 1$.
-
-\item Möbius inversion formula
+\item Cayley 公式
 
 \begin{itemize}
-    %\itemsep-0.5em
-  \item $f(n)=\sum_{d\mid n}g(d)\Leftrightarrow g(n)=\sum_{d\mid n}\mu(d)f(\frac{n}{d})$
-  \item $f(n)=\sum_{n\mid d}g(d)\Leftrightarrow g(n)=\sum_{n\mid d}\mu(\frac{d}{n})f(d)$
+  \item 對於帶標號頂點、度數序列為 $d_1,d_2,\ldots,d_n$ 的情形，生成樹數為 $\dfrac{(n-2)!}{(d_1-1)!(d_2-1)!\cdots(d_n-1)!}$。
+  \item 設 $T_{n,k}$ 為在 $n$ 頂點、$k$ 個連通分量的帶標號森林數，且頂點 $1,2,\ldots,k$ 分屬不同分量，則 $T_{n,k}=k\,n^{\,n-k-1}$。
 \end{itemize}
 
-\item Spherical cap
+\item Erdős–Gallai 定理
+
+非負整數序列 $d_1\ge\cdots\ge d_n$ 可表示為 $n$ 頂點簡單圖的度數序列，當且僅當 $d_1+\cdots+d_n$ 為偶數，且對每個 $1\le k\le n$ 皆有
+\[
+\textstyle\sum_{i=1}^k d_i \le k(k-1)+\sum_{i=k+1}^n \min(d_i,k)\,.
+\]
+
+\item Gale–Ryser 定理
+
+非負整數序列 $a_1\ge\cdots\ge a_n$ 與 $b_1,\ldots,b_n$ 構成雙圖度數序列（bigraphic）的充要條件為
+\[
+\textstyle\sum_{i=1}^n a_i=\sum_{i=1}^n b_i
+\quad\text{且}\quad
+\sum_{i=1}^k a_i\le \sum_{i=1}^n\min(b_i,k)\ \text{對所有 }1\le k\le n.
+\]
+
+\item Fulkerson–Chen–Anstee 定理
+
+一序列 $(a_1,b_1),\ldots,(a_n,b_n)$（非負整數對，且 $a_1\ge\cdots\ge a_n$）為有向圖可實現之入出度序列，當且僅當
+\[
+\textstyle\sum_{i=1}^n a_i=\sum_{i=1}^n b_i
+\quad\text{且}\quad
+\sum_{i=1}^k a_i\le \sum_{i=1}^k\min(b_i,k-1)+\sum_{i=k+1}^n\min(b_i,k)\ \text{對所有 }1\le k\le n.
+\]
+
+\item Pick 定理
+
+對所有頂點為整數點的單純多邊形，有
+\[
+A=\#\{\text{內部格點}\}+\frac{\#\{\text{邊界格點}\}}{2}-1.
+\]
+
+\item 莫比烏斯反演公式
 
 \begin{itemize}
-    %\itemsep-0.5em
-  \item A portion of a sphere cut off by a plane.
-  \item $r$: sphere radius, $a$: radius of the base of the cap, $h$: height of the cap, $\theta$: $\arcsin(a/r)$.
-  \item Volume $=\pi h^2(3r-h)/3=\pi h(3a^2+h^2)/6=\pi r^3(2+\cos\theta)(1-\cos\theta)^2/3$.
-  \item Area $=2\pi rh=\pi(a^2+h^2)=2\pi r^2(1-\cos\theta)$.
+  \item $f(n)=\sum_{d\mid n}g(d)\ \Leftrightarrow\ g(n)=\sum_{d\mid n}\mu(d)\,f\!\left(\dfrac{n}{d}\right)$
+  \item $f(n)=\sum_{n\mid d}g(d)\ \Leftrightarrow\ g(n)=\sum_{n\mid d}\mu\!\left(\dfrac{d}{n}\right)f(d)$
 \end{itemize}
 
-\item Lagrange multiplier
+\item 球冠（Spherical cap）
 
 \begin{itemize}
-    %\itemsep-0.5em
-  \item Optimize $f(x_1, \ldots, x_n)$ when $k$ constraints $g_i(x_1, \ldots, x_n)=0$.
-  \item Lagrangian function $\mathcal{L}(x_1, \ldots, x_n, \lambda_1, \ldots, \lambda_k) = f(x_1, \ldots, x_n) - \sum^{k}_{i=1}\lambda_i g_i(x_1, \ldots, x_n)$.
-  \item The solution corresponding to the original constrained optimization is always a saddle point of the Lagrangian function.
+  \item 球面被平面切下的一部分。
+  \item $r$: 球半徑，$a$: 球冠底面半徑，$h$: 球冠高度，$\theta=\arcsin(a/r)$。
+  \item 體積 $=\dfrac{\pi h^2(3r-h)}{3}=\dfrac{\pi h(3a^2+h^2)}{6}=\dfrac{\pi r^3(2+\cos\theta)(1-\cos\theta)^2}{3}$。
+  \item 表面積 $=2\pi rh=\pi(a^2+h^2)=2\pi r^2(1-\cos\theta)$。
 \end{itemize}
 
-\item Nearest points of two skew lines
+\item 拉格朗日乘數法
 
 \begin{itemize}
-\item $\text{Line 1}: \boldsymbol{v}_1 = \boldsymbol{p}_1 + t_1\boldsymbol{d}_1$
-\item $\text{Line 2}: \boldsymbol{v}_2 = \boldsymbol{p}_2 + t_2\boldsymbol{d}_2$
-\item $\boldsymbol{n} = \boldsymbol{d}_1\times \boldsymbol{d}_2$
-\item $\boldsymbol{n}_1 = \boldsymbol{d}_1 \times \boldsymbol{n}$
-\item $\boldsymbol{n}_2 = \boldsymbol{d}_2 \times \boldsymbol{n}$
-\item $\boldsymbol{c}_1 = \boldsymbol{p}_1 + \frac{(\boldsymbol{p}_2 - \boldsymbol{p}_1)\cdot\boldsymbol{n}_2}{\boldsymbol{d}_1\cdot\boldsymbol{n}_2}\boldsymbol{d}_1$
-\item $\boldsymbol{c}_2 = \boldsymbol{p}_2 + \frac{(\boldsymbol{p}_1 - \boldsymbol{p}_2)\cdot\boldsymbol{n}_1}{\boldsymbol{d}_2\cdot\boldsymbol{n}_1}\boldsymbol{d}_2$
+  \item 在 $k$ 個約束 $g_i(x_1,\ldots,x_n)=0$ 下優化 $f(x_1,\ldots,x_n)$。
+  \item 拉格朗日函數 $\mathcal{L}(x_1,\ldots,x_n,\lambda_1,\ldots,\lambda_k)=f(x_1,\ldots,x_n)-\sum_{i=1}^{k}\lambda_i\,g_i(x_1,\ldots,x_n)$。
+  \item 對應原始受限問題的解是拉格朗日函數的一個鞍點。
 \end{itemize}
 
-\item Derivatives/Integrals
+\item 兩條錯線的最近點
 
-Integration by parts:
-\(\int_a^bf(x)g(x)dx = [F(x)g(x)]_a^b-\int_a^bF(x)g'(x)dx\)
+\begin{itemize}
+\item $\text{Line 1}: \boldsymbol{v}_1=\boldsymbol{p}_1+t_1\boldsymbol{d}_1$
+\item $\text{Line 2}: \boldsymbol{v}_2=\boldsymbol{p}_2+t_2\boldsymbol{d}_2$
+\item $\boldsymbol{n}=\boldsymbol{d}_1\times \boldsymbol{d}_2$
+\item $\boldsymbol{n}_1=\boldsymbol{d}_1\times \boldsymbol{n}$
+\item $\boldsymbol{n}_2=\boldsymbol{d}_2\times \boldsymbol{n}$
+\item $\boldsymbol{c}_1=\boldsymbol{p}_1+\dfrac{(\boldsymbol{p}_2-\boldsymbol{p}_1)\cdot\boldsymbol{n}_2}{\boldsymbol{d}_1\cdot\boldsymbol{n}_2}\,\boldsymbol{d}_1$
+\item $\boldsymbol{c}_2=\boldsymbol{p}_2+\dfrac{(\boldsymbol{p}_1-\boldsymbol{p}_2)\cdot\boldsymbol{n}_1}{\boldsymbol{d}_2\cdot\boldsymbol{n}_1}\,\boldsymbol{d}_2$
+\end{itemize}
+
+\item 導數／積分
+
+分部積分：
+\(\int_a^b f(x)g(x)\,dx=[F(x)g(x)]_a^b-\int_a^b F(x)g'(x)\,dx\)
+
 {
   \setlength{\tabcolsep}{1pt}
   \setlength{\columnsep}{0pt}
@@ -105,34 +117,32 @@ Integration by parts:
     \\
     \frac{d}{dx}\tan x = 1+\tan^2 x
     &
-    \int\tan ax = -\frac{\ln|\cos ax|}{a}
+    \int \tan(ax)\,dx = -\frac{\ln|\cos(ax)|}{a}
     &
-    % \int x\sin ax = \frac{\sin ax-ax \cos ax}{a^2}
-    % &
     \\
-    \int e^{-x^2} = \frac{\sqrt \pi}{2} \text{erf}(x)
+    \int e^{-x^2}\,dx = \frac{\sqrt \pi}{2}\,\operatorname{erf}(x)
     &
-    \int xe^{ax} dx = \frac{e^{ax}}{a^2}(ax-1)
+    \int x e^{ax}\,dx = \frac{e^{ax}}{a^2}(ax-1)
     \\
   \end{tabular}
   
   \(
     \displaystyle
-    \int \sqrt{a^2 + x^2} = \frac{1}{2} \left(x\sqrt{a^2+x^2} + a^2 \operatorname{asinh}(x/a) \right)
+    \int \sqrt{a^2 + x^2}\,dx = \frac{1}{2}\!\left(x\sqrt{a^2+x^2} + a^2 \operatorname{asinh}(x/a) \right)
   \)
 }
 
-\item Spherical Coordinate
+\item 球座標（Spherical Coordinate）
 
 $$
-(x, y, z) = (r\sin\theta\cos\phi, r\sin\theta\sin\phi, r\cos\theta) 
+(x,y,z)=(r\sin\theta\cos\phi,\ r\sin\theta\sin\phi,\ r\cos\theta)
 $$
 
 $$
-(r, \theta, \phi) = (\sqrt{x^2+y^2+z^2}, \textrm{acos}(z/\sqrt{x^2+y^2+z^2}), \textrm{atan2}(y,x)) 
+(r,\theta,\phi)=\bigl(\sqrt{x^2+y^2+z^2},\ \arccos(z/\sqrt{x^2+y^2+z^2}),\ \operatorname{atan2}(y,x)\bigr)
 $$
 
-\item Rotation Matrix
+\item 旋轉矩陣
 
 $$
 M(\theta)=
@@ -140,11 +150,12 @@ M(\theta)=
 \cos\theta & -\sin\theta\\
 \sin\theta & \cos\theta
 \end{bmatrix},
+\quad
 R_x(\theta_x)=
 \begin{bmatrix}
 1 & 0 & 0\\
 0 & \cos\theta_x & -\sin\theta_x \\
-0 & \sin\theta & \cos\theta
+0 & \sin\theta_x & \cos\theta_x
 \end{bmatrix}
 $$
 
