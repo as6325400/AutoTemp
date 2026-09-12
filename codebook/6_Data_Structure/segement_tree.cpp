@@ -60,3 +60,32 @@ void modify(int id, int l, int r, int i, int x) {
     else modify(id * 2 + 1, mid + 1, r, i, x);      // 右
     pull(id);
 }
+
+// ============================================================
+// 區間加值 + 區間最小值 + 最小值出現次數
+// 1. 宣告：  int seg[4 * N];  →  pair<int,int> seg[4 * N];
+//    另加   const int INF = 2e9;          // 給 query 空區間用
+// 2. 葉子：  build 的 seg[id] = a[l];  →  seg[id] = {a[l], 1};
+//            modify 的 seg[id] = x;    →  seg[id] = {x, 1};   // 若用到單點設值
+// 3. pull / query 的合併：抽出 merge，min/cnt 邏輯只寫一次（pull 直接呼叫）：
+inline pair<int, int> merge(pair<int, int> L, pair<int, int> R) {
+    if (L.first != R.first) return L.first < R.first ? L : R; // min 較小者整包保留
+    return {L.first, L.second + R.second};                    // 相等時累加個數
+}
+inline void pull(int id) {
+    seg[id] = merge(seg[id * 2], seg[id * 2 + 1]);
+}
+// 4. apply：tag 只加在 first；second 不變（整段同加 v，min 的位置與個數不變）：
+inline void apply(int id, int l, int r, int v) {
+    seg[id].first += v; lazy[id] += v;
+}
+// query 骨架不變，只有回傳型別、空區間值、最後的合併改用 merge：
+pair<int, int> query(int id, int l, int r, int ql, int qr) {
+    if (r < ql || qr < l) return {INF, 0};
+    if (ql <= l && r <= qr) return seg[id];
+    push(id, l, r);
+    int mid = (l + r) / 2;
+    return merge(query(id * 2, l, mid, ql, qr),
+                 query(id * 2 + 1, mid + 1, r, ql, qr));
+}
+// 5.push / range_add 完全不用改（build/modify 只動葉子那行）。
