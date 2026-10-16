@@ -47,6 +47,27 @@ $n=\sum_i n_i p^i$、$k=\sum_i k_i p^i$，則
 $p$ 較小時，可用 $O(p)$ 預處理 $0$ 到 $p-1$ 的階乘與反階乘，
 每次查詢只需逐位相乘；不直接適用於合數模數。
 
+\item Legendre 公式
+
+設 $p$ 為質數、$n\ge0$，$n!$ 中質因數 $p$ 的次方為
+\[
+\nu_p(n!)=\sum_{j\ge1}\left\lfloor\frac{n}{p^j}\right\rfloor.
+\]
+實作時令 $t=n$，反覆令 $t=\lfloor t/p\rfloor$ 並累加，直到 $t=0$；
+避免直接計算 $p^j$ 溢位。
+組合數的次方為 $\nu_p\!\binom nk=\nu_p(n!)-\nu_p(k!)-\nu_p((n-k)!)$（$0\le k\le n$）；
+$n!$ 的十進位尾零數為 $\nu_5(n!)$。
+
+\item 錯排公式
+
+$D_n$ 為 $n$ 個不同元素的排列中，沒有任何元素留在原位的方案數。
+$D_0=1$、$D_1=0$，且
+\[
+D_n=(n-1)(D_{n-1}+D_{n-2})\quad(n\ge2).
+\]
+用前兩項遞推，時間 $O(n)$、額外空間 $O(1)$。
+可逐步取模；加法與乘法仍須防溢位。
+
 \item Kirchhoff 定理
 
 設 $L$ 為圖 $G$ 的 $n\times n$ Laplacian 矩陣，其中 $L_{ii}=d(i)$，$L_{ij}=-c$，$c$ 為邊 $(i,j)$ 的條數。
@@ -125,6 +146,19 @@ A=\#\{\text{內部格點}\}+\frac{\#\{\text{邊界格點}\}}{2}-1.
   \item $f(n)=\sum_{d\mid n}g(d)\ \Leftrightarrow\ g(n)=\sum_{d\mid n}\mu(d)\,f\!\left(\dfrac{n}{d}\right)$
   \item $f(n)=\sum_{n\mid d}g(d)\ \Leftrightarrow\ g(n)=\sum_{n\mid d}\mu\!\left(\dfrac{d}{n}\right)f(d)$
 \end{itemize}
+
+\item 整除分塊
+
+設整數 $n\ge1$，從 $l=1$ 開始，每次計算
+\[
+q=\left\lfloor\frac nl\right\rfloor,\qquad
+r=\left\lfloor\frac nq\right\rfloor.
+\]
+則 $i\in[l,r]$ 的 $\lfloor n/i\rfloor$ 都等於 $q$，且 $r$ 為最右端。
+若 $r=n$ 即結束，否則令 $l=r+1$ 繼續，共 $O(\sqrt n)$ 段。
+若 $A(t)=\sum_{i=1}^{t}a_i$ 可快速求得，則
+$\sum_{i=l}^{r}a_i g(\lfloor n/i\rfloor)=[A(r)-A(l-1)]g(q)$；
+適合計算帶整除商的和式，乘法與累加須防溢位。
 
 \item 球冠（Spherical cap）
 
