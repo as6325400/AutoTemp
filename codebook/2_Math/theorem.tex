@@ -11,6 +11,42 @@ $$
 C(n+m,k)=\sum_{i=0}^{k} C(n,i)\,C(m,k-i)
 $$
 
+\item 隔板法＋排容原理（容斥原理）
+
+設整數 $n\ge0$、$k\ge1$，將 $n$ 個相同物品分給 $k$ 個不同對象。
+約定 $\binom ab=0$ 若 $a<0$、$b<0$ 或 $b>a$。
+\[
+\begin{aligned}
+x_1+\cdots+x_k=n,\ x_i\ge0 &: \binom{n+k-1}{k-1},\\
+x_1+\cdots+x_k=n,\ x_i\ge1 &: \binom{n-1}{k-1}.
+\end{aligned}
+\]
+若有整數下界 $x_i\ge a_i$，先令 $y_i=x_i-a_i$，總和改為 $n-\sum_i a_i$。
+排容原理：扣掉不合法情況，再補回重複扣除的交集。
+\[
+\left|\bigcup_{i=1}^{k}A_i\right|
+=\sum_{\emptyset\ne S\subseteq\{1,\ldots,k\}}
+(-1)^{|S|+1}\left|\bigcap_{i\in S}A_i\right|.
+\]
+若限制 $0\le x_i\le b_i$（$b_i$ 為非負整數），解數為
+\[
+\sum_{S\subseteq\{1,\ldots,k\}}(-1)^{|S|}
+\binom{n-\sum_{i\in S}(b_i+1)+k-1}{k-1}.
+\]
+$S$ 表示指定違反上界的變數；枚舉 $2^k$ 個子集合，適合 $k$ 小時使用。
+
+\item Lucas 定理
+
+設 $p$ 為質數、$n,k$ 為非負整數，將 $n,k$ 寫成 $p$ 進位：
+$n=\sum_i n_i p^i$、$k=\sum_i k_i p^i$，則
+\[
+\binom nk\equiv\prod_i\binom{n_i}{k_i}\pmod p.
+\]
+實作時反覆取 $n\bmod p$、$k\bmod p$，再各自除以 $p$；
+任一位 $k_i>n_i$ 時答案為 $0$。
+$p$ 較小時，可用 $O(p)$ 預處理 $0$ 到 $p-1$ 的階乘與反階乘，
+每次查詢只需逐位相乘；不直接適用於合數模數。
+
 \item Kirchhoff 定理
 
 設 $L$ 為圖 $G$ 的 $n\times n$ Laplacian 矩陣，其中 $L_{ii}=d(i)$，$L_{ij}=-c$，$c$ 為邊 $(i,j)$ 的條數。
@@ -65,6 +101,16 @@ S=\sum_{i=1}^{n}(x_i y_{i+1}-x_{i+1}y_i),
 \]
 可凹但不可自交；$S>0$ 為逆時針，$S<0$ 為順時針。
 整數座標可保留 $|S|=2A$；叉積與累加須防溢位。
+
+\item 邊界格點數
+
+沿用上述頂點順序，整數頂點的單純多邊形之邊界格點數為
+\[
+B=\sum_{i=1}^{n}\gcd\!\left(|x_{i+1}-x_i|,\ |y_{i+1}-y_i|\right).
+\]
+單一線段含兩端點有 $\gcd(|\Delta x|,|\Delta y|)+1$ 個格點；
+多邊形各邊只加 $\gcd$，避免重複計算頂點。
+搭配測量師公式與 Pick 定理可求內部格點數。
 
 \item Pick 定理
 
