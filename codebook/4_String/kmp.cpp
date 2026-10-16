@@ -1,5 +1,6 @@
-vector<int> build(string &s){
-  vector<int> next = {0, 0};
+// 計算可重疊出現次數；空模式匹配 n + 1 個位置
+vector<int> build(const string &s){
+  vector<int> next(s.empty() ? 1 : 2);
   // 匹配失敗跳去哪 (最長共同前後綴)
   int length = s.size(), j = 0;
   for(int i = 1; i < length; i++){
@@ -12,9 +13,11 @@ vector<int> build(string &s){
   return next;
 }
 
-int match(string &a, string &b){
+int match(const string &a, const string &b){
+  if (b.empty()) return (int)a.size() + 1;
   auto next = build(b);
-  int length = a.size(), length2 = b.size(), j = 0, count = 0;
+  int length = a.size(), length2 = b.size();
+  int j = 0, count = 0;
   for(int i = 0; i < length; i++){
     while(j > 0 and a[i] != b[j]){
       j = next[j];

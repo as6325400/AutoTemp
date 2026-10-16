@@ -1,40 +1,34 @@
-class trie{
-  public:
-    class node{
-      public:
-        int count;
-        vector<trie::node*> child;
-        node(){
-          child.resize(26, nullptr);
-          count = 0;
-        }
-        ~node() {
-          for (auto c : child) 
-            if (c) delete c; 
-        }
-    };
-    node* root;
-    trie(){
-      root = new node;
+// 僅接受 a..z；擁有整棵樹，不可複製
+// 解構採遞迴，極深單字需改用節點池
+class trie {
+ public:
+  struct node {
+    int count = 0;
+    vector<node*> child = vector<node*>(26, nullptr);
+    ~node() {
+      for (auto c : child) delete c;
     }
-    ~trie() {
-      delete root; 
+  };
+  node* root = new node;
+  trie() = default;
+  trie(const trie&) = delete;
+  trie& operator=(const trie&) = delete;
+  ~trie() { delete root; }
+  void insert(const string& s) {
+    auto p = root;
+    for (char c : s) {
+      int k = c - 'a';
+      if (!p->child[k]) p->child[k] = new node;
+      p = p->child[k];
     }
-    void insert(string s){
-      auto temp = root;
-      for(int i = 0; i < s.size(); i++){
-        if(!temp -> child[s[i] - 'a']) temp -> child[s[i] - 'a'] = new node;
-        temp = temp -> child[s[i] - 'a'];
-      }
-      temp -> count++;
+    ++p->count;
+  }
+  bool search(const string& s) const {
+    auto p = root;
+    for (char c : s) {
+      p = p->child[c - 'a'];
+      if (!p) return false;
     }
-    bool search(string &s){
-      auto temp = root;
-      for(int i = 0; i < s.size(); i++){
-        temp = temp -> child[s[i] - 'a'];
-        if(!temp) return false;
-      }
-      if(temp -> count > 0) return true;
-      return false;
-    }
+    return p->count > 0;
+  }
 };
