@@ -1,34 +1,31 @@
-class Sparse_Table{
+class Sparse_Table {
   // 0-base
   // 要改成找最大把min換成max就好
-  private:
-  public:
-    int spt[500005][22][2];
-    Sparse_Table(vector<int> &ar){
-      int n = ar.size();
-      for (int i = 0; i < n; i++){
-          spt[i][0][0] = ar[i];
-          // spt[i][0][1] = ar[i];
+  // 此版同時建 min/max；只需一種時可刪另一張表。
+  vector<vector<int>> mn, mx;
+public:
+  Sparse_Table(const vector<int>& a) {
+    int n = a.size(), k = n ? __lg(n) + 1 : 0;
+    mn.assign(k, vector<int>(n));
+    mx = mn;
+    if (!n) return;
+    mn[0] = mx[0] = a;
+    for (int j = 1; j < k; ++j)
+      for (int i = 0; i + (1 << j) <= n; ++i) {
+        int r = i + (1 << (j - 1));
+        mn[j][i] = min(mn[j-1][i], mn[j-1][r]);
+        mx[j][i] = max(mx[j-1][i], mx[j-1][r]);
       }
-      for (int j = 1; (1 << j) <= n; j++) {
-        for (int i = 0; (i + (1 << j) - 1) < n; i++) {
-          spt[i][j][0] = min(spt[i + (1 << (j - 1))][j - 1][0], spt[i][j - 1][0]);
-          // spt[i][j][1] = max(spt[i + (1 << (j - 1))][j - 1][1], spt[i][j - 1][1]);
-        }
-      }
-    }
-    int query_min(int l, int r)
-    {
-      if(l>r) return INT_MAX;
-      int j = (int)__lg(r - l + 1);
-      ///j = 31 - __builtin_clz(r - l+1);
-      return min(spt[l][j][0], spt[r - (1 << j) + 1][j][0]);
-    }
-    int query_max(int l, int r)
-    {
-      if(l>r) return INT_MAX;
-      int j = (int)__lg(r - l + 1);
-      ///j = 31 - __builtin_clz(r - l+1);
-      return max(spt[l][j][1], spt[r - (1 << j) + 1][j][1]);
-    }
+  }
+  // 非空詢問須滿足 0 <= l <= r < n。
+  int query_min(int l, int r) const {
+    if (l > r) return numeric_limits<int>::max();
+    int j = __lg(r - l + 1);
+    return min(mn[j][l], mn[j][r - (1 << j) + 1]);
+  }
+  int query_max(int l, int r) const {
+    if (l > r) return numeric_limits<int>::lowest();
+    int j = __lg(r - l + 1);
+    return max(mx[j][l], mx[j][r - (1 << j) + 1]);
+  }
 };

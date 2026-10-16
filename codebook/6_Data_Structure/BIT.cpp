@@ -1,31 +1,36 @@
-#define lowbit(x) x & -x
+#define lowbit(x) ((x) & -(x))
+// 1-based，bit 開 n + 1 格；modify 的 idx 須 >= 1。
+void modify(vector<int>& bit, int idx, int val) {
+  for (; idx < (int)bit.size(); idx += lowbit(idx))
+    bit[idx] += val;
+}
 
-void modify(vector<int> &bit, int idx, int val) {
-	for(int i = idx; i <= bit.size(); i+= lowbit(i)) bit[i] += val;
+int query(const vector<int>& bit, int idx) {
+  int ans = 0;
+  for (; idx > 0; idx -= lowbit(idx)) ans += bit[idx];
+  return ans;
 }
- 
-int query(vector<int> &bit, int idx) {
-	int ans = 0;
-	for(int i = idx; i > 0; i-= lowbit(i)) ans += bit[i];
-	return ans;
-}
- 
+
 // the first i s.t. a[1]+...+a[i] >= k
-int findK(vector<int> &bit, int k) {
-	int idx = 0, res = 0;
-	int mx = __lg(bit.size()) + 1;
-	for(int i = mx; i >= 0; i--) {
-		if((idx | (1<<i)) > bit.size()) continue;
-		if(res + bit[idx | (1<<i)] < k) {
-			idx = (idx | (1<<i)); 
-			res += bit[idx];
-		}
-	}
-	return idx + 1;
+// 須 a[i] >= 0、k >= 1；若總和不足，回傳 n + 1。
+int findK(const vector<int>& bit, int k) {
+  int n = (int)bit.size() - 1, idx = 0;
+  for (int step = n ? (1LL << __lg(n)) : 0;
+       step; step >>= 1) {
+    int next = idx + step;
+    if (next <= n && bit[next] < k)
+      idx = next, k -= bit[next];
+  }
+  return idx + 1;
 }
+
 //O(n)建bit
-for (int i = 1; i <= n; ++i) {
-    bit[i] += a[i];
+// a 也是 1-based，第 0 格不使用。
+vector<int> buildBIT(const vector<int>& a) {
+  auto bit = a;
+  for (int i = 1; i < (int)bit.size(); ++i) {
     int j = i + lowbit(i);
-    if (j <= n) bit[j] += bit[i];
+    if (j < (int)bit.size()) bit[j] += bit[i];
+  }
+  return bit;
 }

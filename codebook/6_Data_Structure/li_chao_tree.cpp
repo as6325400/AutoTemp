@@ -2,6 +2,7 @@
 //       支援「加入直線」與「單點查詢最大值」。
 // 求最小值：對所有 (m,b) 取負後 query 再取負即可。
 // 適用情境：動態 CHT、斜率優化 DP。
+// m*x+b 須不溢位 ll，且介於 -LINF 與 LINF。
 using ll = long long;
 const ll LINF = 4e18; // 大於所有可能的直線取值
 
@@ -21,7 +22,7 @@ struct LiChao {
         xs.erase(unique(xs.begin(), xs.end()),
                  xs.end());
         n = (int)xs.size();
-        tree.assign(4 * max(1, n), Line{0, -LINF});
+        tree.assign(4 * max<int>(1, n), Line{0, -LINF});
     }
 
     void add_line(Line nw, int id, int l, int r) {
