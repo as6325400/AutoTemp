@@ -107,10 +107,13 @@ D_n=(n-1)(D_{n-1}+D_{n-2})\quad(n\ge2).
 
 一序列 $(a_1,b_1),\ldots,(a_n,b_n)$（非負整數對，且 $a_1\ge\cdots\ge a_n$）為有向圖可實現之入出度序列，當且僅當
 \[
-\textstyle\sum_{i=1}^n a_i=\sum_{i=1}^n b_i
-\quad\text{且}\quad
-\sum_{i=1}^k a_i\le \sum_{i=1}^k\min(b_i,k-1)+\sum_{i=k+1}^n\min(b_i,k)\ \text{對所有 }1\le k\le n.
+\begin{aligned}
+\sum_{i=1}^n a_i &= \sum_{i=1}^n b_i,\\
+\sum_{i=1}^k a_i &\le \sum_{i=1}^k\min(b_i,k-1)
+  +\sum_{i=k+1}^n\min(b_i,k).
+\end{aligned}
 \]
+其中不等式須對所有 $1\le k\le n$ 成立。
 
 \item 測量師公式（鞋帶公式）
 
