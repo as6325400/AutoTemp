@@ -5,14 +5,13 @@
 
 #define int long long
 
+// m >= 1，6m 須放得進 long long；O(週期)。
 int pisano_period(int m) {
+  if (m == 1) return 1;
   int pre = 0, cur = 1;
-  int temp;
-  for (int i = 0; i < m * m; i++) {
-    temp = pre;
-    pre = cur;
-    cur = (temp + cur) % m;
-    if (pre == 0 && cur == 1) return i + 1;
+  for (int i = 1;; ++i) {
+    int next = (pre + cur) % m;
+    pre = cur, cur = next;
+    if (pre == 0 && cur == 1) return i;
   }
-  return 0; 
 }
