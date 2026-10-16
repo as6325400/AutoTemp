@@ -1,39 +1,33 @@
-int merge(vector<pair<int, int>>& v, int l, int mid, int r) {
-  vector<pair<int, int>> temp(r - l + 1);
-  int i = l, j = mid + 1, k = 0, inv_count = 0;
-  while (i <= mid && j <= r) {
-      if (v[i].second <= v[j].second) {
-          temp[k++] = v[i++];
-      } else {
-          temp[k++] = v[j++];
-          inv_count += (mid - i + 1); 
-      }
+// 依 second 計逆序數對，並將 [l, r] 穩定排序。
+// 回傳 long long；暫存陣列只配置一次，O(n log n)。
+long long mergeSort(vector<pair<int, int>>& v,
+    vector<pair<int, int>>& tmp, int l, int r) {
+  if (l >= r) return 0;
+  int mid = l + (r - l) / 2;
+  long long count = mergeSort(v, tmp, l, mid)
+                 + mergeSort(v, tmp, mid + 1, r);
+  int i = l, j = mid + 1;
+  for (int k = l; k <= r; ++k) {
+    if (j > r || (i <= mid &&
+                  v[i].second <= v[j].second))
+      tmp[k] = v[i++];
+    else tmp[k] = v[j++], count += mid - i + 1;
   }
-  while (i <= mid) temp[k++] = v[i++];
-  while (j <= r) temp[k++] = v[j++];
-  for (int i = l; i <= r; i++) {
-    v[i] = temp[i - l];
-  }
-  return inv_count;
-}
- 
-int mergeSort(vector<pair<int, int>>& v, int l, int r) {
-  int count = 0;
-  if (l < r) {
-    int mid = l + (r - l) / 2;
-    count += mergeSort(v, l, mid);
-    count += mergeSort(v, mid + 1, r);
-    count += merge(v, l, mid, r);
-  }
+  copy(tmp.begin() + l, tmp.begin() + r + 1,
+       v.begin() + l);
   return count;
 }
+long long mergeSort(vector<pair<int, int>>& v,
+                    int l, int r) {
+  vector<pair<int, int>> tmp(v.size());
+  return mergeSort(v, tmp, l, r);
+}
 
-signed main()
-{
+signed main() {
   int n;
   cin >> n;
   vector<pair<int, int>> arr(n);
-  for(int i = 0; i < n; i++){
+  for (int i = 0; i < n; ++i) {
     arr[i].first = i;
     cin >> arr[i].second;
   }
